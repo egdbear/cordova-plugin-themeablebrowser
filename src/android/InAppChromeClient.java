@@ -29,6 +29,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebStorage;
 import android.webkit.WebView;
 import android.webkit.GeolocationPermissions.Callback;
+import android.view.View;
 
 public class InAppChromeClient extends WebChromeClient {
 
@@ -121,7 +122,7 @@ public class InAppChromeClient extends WebChromeClient {
             else
             {
                 // Anything else with a gap: prefix should get this message
-                LOG.w(LOG_TAG, "ThemeableBrowser does not support Cordova API calls: " + url + " " + defaultValue); 
+                LOG.w(LOG_TAG, "ThemeableBrowser does not support Cordova API calls: " + url + " " + defaultValue);
                 result.cancel();
                 return true;
             }
@@ -129,4 +130,13 @@ public class InAppChromeClient extends WebChromeClient {
         return false;
     }
 
+    @Override
+    public void onShowCustomView(View view, CustomViewCallback callback) {
+        callback.onCustomViewHidden();
+    }
+
+    @Override
+    public void onHideCustomView() {
+        super.onHideCustomView();
+    }
 }
